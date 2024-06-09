@@ -70,12 +70,12 @@ public class EgresosActivity extends AppCompatActivity {
         });
 
         /*cargar datos de la Firebase a recycler*/
-        CargarDatos_lista_ingresos();
+        CargarDatos_lista_egresos();
 
 
     }
 
-    private void CargarDatos_lista_ingresos() {
+    private void CargarDatos_lista_egresos() {
         egresos_List.clear();
         firestore_lista_egresos.collection("Egresos")
                 .addSnapshotListener((value, error) -> {
@@ -87,7 +87,6 @@ public class EgresosActivity extends AppCompatActivity {
                     for (DocumentChange dc : Objects.requireNonNull(value).getDocumentChanges()){
 
                         if (dc.getType() == DocumentChange.Type.ADDED){
-                            //ingresos_List.add(dc.getDocument().toObject(Ingresos_Data.class));
                             egresos_List.add(dc.getDocument().toObject(Egresos_Data.class));
                         }
 

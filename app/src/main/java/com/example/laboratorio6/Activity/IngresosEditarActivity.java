@@ -58,6 +58,7 @@ public class IngresosEditarActivity extends AppCompatActivity {
                 intent.putExtra("id_fecha_ingreso", id_fecha_ingreso);
                 v.getContext().startActivity(intent);
                 startActivity(intent);
+                finish();
             }
         });
 

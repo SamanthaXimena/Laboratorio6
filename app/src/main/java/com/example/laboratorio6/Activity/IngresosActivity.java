@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.laboratorio6.Adapter.IngresosAdapter;
 import com.example.laboratorio6.Data.Ingresos_Data;
 import com.example.laboratorio6.MainActivity;
+import com.example.laboratorio6.MenuBarFragment;
 import com.example.laboratorio6.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -38,6 +39,7 @@ public class IngresosActivity extends AppCompatActivity {
     FirebaseUser user;
     private FirebaseAuth auth;
     FirebaseFirestore firestore_lista_ingresos;
+    MenuBarFragment menuBarFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,7 @@ public class IngresosActivity extends AppCompatActivity {
 
         /*cargar datos de la Firebase a recycler*/
         CargarDatos_lista_ingresos();
+
 
 
     }

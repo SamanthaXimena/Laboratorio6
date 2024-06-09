@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.example.laboratorio6.Activity.EgresosActivity;
 import com.example.laboratorio6.Activity.IngresosActivity;
 import com.example.laboratorio6.Activity.ResumenActivity;
+import com.facebook.login.LoginManager;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -85,6 +86,13 @@ public class MenuBarFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 handleOptionClick(false, false, false, true);
+                //LoginManager.getInstance().logOut();
+
+                // Iniciar MainActivity y finalizar la actividad actual
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                //getActivity().finish();  // Finaliza la actividad actual
+
             }
         });
 
@@ -132,26 +140,8 @@ public class MenuBarFragment extends Fragment {
             imageButtonLogout.setScaleX(0.8f);
             imageButtonLogout.setScaleY(0.8f);
             textViewLogout.setVisibility(View.VISIBLE);
-/*
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);*/
 
-            AuthUI.getInstance().signOut(requireContext())
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                // Si se cierra la sesión correctamente, redirige al usuario a MainActivity
-                                Intent intent = new Intent(requireContext(), MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                requireActivity().finish(); // Finaliza la actividad actual
-                            } else {
-                                // Si ocurre un error al cerrar sesión, manejarlo aquí
-                            }
-                        }
-                    });
+
         }
 
 
@@ -197,3 +187,4 @@ public class MenuBarFragment extends Fragment {
 
     }
 }
+

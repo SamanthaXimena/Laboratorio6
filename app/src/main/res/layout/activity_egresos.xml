@@ -46,6 +46,21 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="61dp"
+            android:layout_marginEnd="98dp"
+            android:layout_marginBottom="12dp"
+            android:text="LISTA DE EGRESOS"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
 
     </RelativeLayout>
 
@@ -96,17 +111,7 @@
         android:src="@drawable/baseline_add_24"
         app:tint="@color/white" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="122dp"
-        android:layout_marginBottom="600dp"
-        android:text="LISTA DE EGRESOS"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+
 
 
 </RelativeLayout>

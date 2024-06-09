@@ -63,32 +63,45 @@
         android:textAllCaps="true"
         android:textSize="25sp"
         android:textStyle="bold"/>
-    <Button
+
+    <ImageButton
         android:id="@+id/btn_login_google"
-        android:text="Iniciar sesión con GOOGLE"
         android:layout_marginTop="10dp"
-        android:backgroundTint="#B51E1E"
         android:layout_width="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:background="@drawable/appgoogle"
         android:layout_height="wrap_content"/>
 
+    <ImageButton
+        android:id="@+id/btn_login_fb"
+        android:layout_marginTop="-60dp"
+        android:layout_marginRight="70dp"
+        android:layout_width="wrap_content"
+        android:background="@drawable/appfacebook"
+        android:layout_height="wrap_content"/>
+<!--
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button_facebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginBottom="30dp" /> -->
 
 
-    <TextView
+
+
+    <Button
         android:id="@+id/registerNow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Click AQUI para Registrarse"
         android:textAllCaps="false"
-        android:textColor="#0866FF"
+        android:textColor="@color/white"
+        android:layout_marginTop="60dp"
         android:textSize="20sp"
+        android:backgroundTint="#675C29"
         android:textStyle="bold|italic" />
 
 </LinearLayout>

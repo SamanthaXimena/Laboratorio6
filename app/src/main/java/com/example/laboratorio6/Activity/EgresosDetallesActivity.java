@@ -69,9 +69,10 @@ public class EgresosDetallesActivity  extends AppCompatActivity {
         deleteButton_back_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EgresosDetallesActivity.this, EgresosActivity.class);
                 ConfirmacionPopup(id_titulo_egresos);
-                startActivity(intent);
+                /*Intent intent = new Intent(EgresosDetallesActivity.this, EgresosActivity.class);
+                ConfirmacionPopup(id_titulo_egresos);
+                startActivity(intent);*/
             }
         });
 
@@ -86,13 +87,20 @@ public class EgresosDetallesActivity  extends AppCompatActivity {
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(EgresosDetallesActivity.this, EgresosActivity.class);
+                //Intent intent = new Intent(EgresosDetallesActivity.this, EgresosActivity.class);
                 borrarEquipoPorTitulo(id_titulo_egresos);
-                startActivity(intent);
+               // startActivity(intent);
                 dialog.dismiss();
 
             }
-        });
+        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create()
+                .show();
 
 
     }
@@ -108,12 +116,14 @@ public class EgresosDetallesActivity  extends AppCompatActivity {
                             db.collection("Egresos").document(ID)
                                     .delete()
                                     .addOnSuccessListener(unused -> {
-                                        // Correcto
-                                        Toast.makeText(this, "Egreso con Titulo " + id_titulo_egresos + " eliminado correctamente", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(EgresosDetallesActivity.this, "Egreso con Título " + id_titulo_egresos + " eliminado correctamente", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(EgresosDetallesActivity.this, IngresosActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                        finish();
                                     })
                                     .addOnFailureListener(e -> {
-                                        // Error
-                                        Toast.makeText(this, "No se pudo eliminar el Titulo  " + id_titulo_egresos, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(EgresosDetallesActivity.this, "No se pudo eliminar el Título " + id_titulo_egresos, Toast.LENGTH_SHORT).show();
                                     });
                         }
                     } else {

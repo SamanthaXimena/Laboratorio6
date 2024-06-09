@@ -29,16 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressBar progressBar;
     TextView textView;
 
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
 
                                     Toast.makeText(RegisterActivity.this, "Cuenta creada.", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), IngresosActivity.class);
                                     startActivity(intent);
                                     finish();
 

@@ -13,9 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.laboratorio6.Adapter.EgresosAdapter;
-import com.example.laboratorio6.Adapter.IngresosAdapter;
 import com.example.laboratorio6.Data.Egresos_Data;
-import com.example.laboratorio6.Data.Ingresos_Data;
+
 import com.example.laboratorio6.R;
 import com.example.laboratorio6.databinding.ActivityEgresosNuevoBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -45,6 +44,7 @@ public class EgresosNuevoActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         db = FirebaseFirestore.getInstance();
+
         binding.saveButtonEgresos.setOnClickListener(view -> {
             ConfirmacionPopup();
         });
@@ -90,21 +90,21 @@ public class EgresosNuevoActivity extends AppCompatActivity {
         String fecha = binding.idFechaEgresos.getText().toString();
 
 
-        Ingresos_Data ingresosData  = new Ingresos_Data(titulo, monto,descripcion, fecha);
-        ingresosData.setTitulo(titulo);
-        ingresosData.setMonto(monto);
-        ingresosData.setDescripcion(descripcion);
-        ingresosData.setFecha(fecha);
+        Egresos_Data egresosData  = new Egresos_Data(titulo, monto,descripcion, fecha);
+        egresosData.setTitulo(titulo);
+        egresosData.setMonto(monto);
+        egresosData.setDescripcion(descripcion);
+        egresosData.setFecha(fecha);
 
 
 
 
-        db.collection("Ingresos")
+        db.collection("Egresos")
                 .document(titulo)
-                .set(ingresosData)
+                .set(egresosData)
                 .addOnSuccessListener(unused -> {
                     Toast.makeText(EgresosNuevoActivity.this, "Egreso guardado", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(EgresosNuevoActivity.this, IngresosActivity.class);
+                    Intent intent = new Intent(EgresosNuevoActivity.this, EgresosActivity.class);
                     startActivity(intent);
                 })
                 .addOnFailureListener(e -> {

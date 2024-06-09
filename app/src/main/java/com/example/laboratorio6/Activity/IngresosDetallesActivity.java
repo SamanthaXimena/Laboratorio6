@@ -78,9 +78,10 @@ public class IngresosDetallesActivity extends AppCompatActivity {
         deleteButton_back_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IngresosDetallesActivity.this, IngresosActivity.class);
                 ConfirmacionPopup(id_titulo_ingreso);
-                startActivity(intent);
+               /* Intent intent = new Intent(IngresosDetallesActivity.this, IngresosActivity.class);
+                ConfirmacionPopup(id_titulo_ingreso);
+                startActivity(intent);*/
             }
         });
 
@@ -89,19 +90,25 @@ public class IngresosDetallesActivity extends AppCompatActivity {
 
     private void ConfirmacionPopup(String id_titulo_ingreso){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("¿Estas seguro de eliminar el equipo?");
-
+        builder.setTitle("¿Estas seguro de eliminar el Ingreso?");
 
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(IngresosDetallesActivity.this, IngresosActivity.class);
+                //Intent intent = new Intent(IngresosDetallesActivity.this, IngresosActivity.class);
                 borrarEquipoPorTitulo(id_titulo_ingreso);
-                startActivity(intent);
+                //startActivity(intent);
                 dialog.dismiss();
 
             }
-        });
+        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create()
+                .show();
 
 
     }
@@ -112,17 +119,19 @@ public class IngresosDetallesActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            String equipoId = document.getId();
+                            String borraID = document.getId();
 
-                            db.collection("Ingresos").document(equipoId)
+                            db.collection("Ingresos").document(borraID)
                                     .delete()
                                     .addOnSuccessListener(unused -> {
-                                        // Correcto
-                                        Toast.makeText(this, "Ingreso con Titulo " + id_titulo_ingreso + " eliminado correctamente", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(IngresosDetallesActivity.this, "Ingreso con Título " + id_titulo_ingreso + " eliminado correctamente", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(IngresosDetallesActivity.this, IngresosActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                        finish();
                                     })
                                     .addOnFailureListener(e -> {
-                                        // Error
-                                        Toast.makeText(this, "No se pudo eliminar el Titulo  " + id_titulo_ingreso, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(IngresosDetallesActivity.this, "No se pudo eliminar el Título " + id_titulo_ingreso, Toast.LENGTH_SHORT).show();
                                     });
                         }
                     } else {

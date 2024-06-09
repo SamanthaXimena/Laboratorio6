@@ -12,7 +12,7 @@
 
 
     <string name="facebook_app_id">317287154655157</string>
-    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="fb_login_protocol_scheme">fb317287154655157</string>
     <string name="facebook_client_token">56789</string>
 
 
