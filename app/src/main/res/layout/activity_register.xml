@@ -48,8 +48,9 @@
 
     <Button
         android:id="@+id/btn_register"
-        android:text="Resgistrarte"
+        android:text="Resgistrate"
         android:layout_width="wrap_content"
+        android:backgroundTint="#A88113"
         android:layout_height="wrap_content"/>
 
 

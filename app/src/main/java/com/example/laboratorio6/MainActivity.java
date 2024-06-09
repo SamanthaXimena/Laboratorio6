@@ -32,6 +32,7 @@ import com.facebook.login.widget.LoginButton;
 import com.firebase.ui.auth.AuthMethodPickerLayout;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
+import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -62,16 +63,22 @@ public class MainActivity extends AppCompatActivity {
     Button registrar_inicio;
     CallbackManager callbackManager;
     private static final int RC_SIGN_IN = 9001;
+    private static final int REQ_ONE_TAP = 2;  // Can be any integer unique to the Activity.
+    private boolean showOneTapUI = true;
 
-
-    private GoogleSignInClient client;
+    private GoogleSignInClient mGoogleSignInClient;
     ImageButton login_button_Google;
+
 /*
     public void onStart() {
-        super.onStart();
+
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        if(currentUser != null){
+            Intent intent = new Intent(MainActivity.this , IngresosActivity.class );
+            startActivity(intent);
+        }
+        super.onStart();
 
     }*/
 
@@ -86,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         buttonLogin_correo_passwrd = findViewById(R.id.btn_login);
         progressBar = findViewById(R.id.progressBar);
         registrar_inicio = findViewById(R.id.registerNow);
-        mAuth = FirebaseAuth.getInstance();
+        String TAG = "GoogleSignIn";
 
 //-------------------AUTHENTICATION CORREO Y CONTRASEÑA -------------------------//
         buttonLogin_correo_passwrd.setOnClickListener(new View.OnClickListener() {
@@ -129,20 +136,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 //-------------------AUTHENTICATION GOOGLE -------------------------//
+
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(com.firebase.ui.auth.R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        client = GoogleSignIn.getClient(this, options);
+        mGoogleSignInClient = GoogleSignIn.getClient(this, options);
+
+
+
         login_button_Google = findViewById(R.id.btn_login_google);
         login_button_Google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = client.getSignInIntent();
-                startActivityForResult(intent, 1234);
+
+                sigIn();
 
             }
         });
+
 
         //-------------------AUTHENTICATION FACEBOOK -------------------------//
         callbackManager = CallbackManager.Factory.create();
@@ -188,7 +200,20 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        mAuth = FirebaseAuth.getInstance();
+
+
     }
+
+    private void sigIn(){
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+
+
+    @SuppressLint("RestrictedApi")
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
 
@@ -218,9 +243,49 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            if(task.isSuccessful()){
+                try {
+                    // Google Sign In was successful, authenticate with Firebase
+                    GoogleSignInAccount account = task.getResult(ApiException.class);
+                    Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId()); firebaseAuthWithGoogle(account.getIdToken());
+                } catch (ApiException e) {
+                    // Google Sign In fallido, actualizar GUI
+                    Log.w(TAG, "Google sign in failed", e);
+                    }
+
+                } else{
+                    Log.d(TAG, "Error, login no exitoso:" + task.getException().toString());
+                    Toast.makeText(this, "Ocurrio un error. "+task.getException().toString(),
+                    Toast.LENGTH_LONG).show(); }
+
+
+            }
+
+
     }
+
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential) .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @SuppressLint("RestrictedApi")
+            @Override public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (task.isSuccessful()) {
+                Log.d(TAG, "signInWithCredential:success");
+                    //FirebaseUser user = mAuth.getCurrentUser();
+                    Intent intent = new Intent(MainActivity.this , IngresosActivity.class );
+                    startActivity(intent);
+                    finish();
+
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithCredential:failure", task.getException()); } } }); }
+
 }

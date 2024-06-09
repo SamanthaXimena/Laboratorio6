@@ -33,7 +33,7 @@ public class MenuBarFragment extends Fragment {
     private TextView textViewIngresos, textViewEgresos, textViewResumen, textViewLogout;
     private LinearLayout layoutIngresos, layoutEgresos, layoutResumen, layoutLogout;
 
-    //FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.menu_bar_fragment, container, false);
@@ -55,7 +55,7 @@ public class MenuBarFragment extends Fragment {
 
         configurarListeners();
 
-       // mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         return view;
     }
@@ -87,10 +87,11 @@ public class MenuBarFragment extends Fragment {
             public void onClick(View v) {
                 handleOptionClick(false, false, false, true);
                 //LoginManager.getInstance().logOut();
-
+                mAuth.signOut();
                 // Iniciar MainActivity y finalizar la actividad actual
-                Intent intent = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getActivity() , MainActivity.class);
                 startActivity(intent);
+                getActivity().finish();
                 //getActivity().finish();  // Finaliza la actividad actual
 
             }
