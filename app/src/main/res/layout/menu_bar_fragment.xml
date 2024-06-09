@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="@color/color_opcion2"
+    android:orientation="horizontal"
+    >
+
+    <LinearLayout
+        android:id="@+id/layoutIngresos"
+        android:layout_width="6dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/imageButtonIngresos"
+            android:layout_width="wrap_content"
+            android:layout_height="46dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:src="@drawable/baseline_monetization_on_24" />
+
+        <TextView
+            android:id="@+id/textViewIngresos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Ingresos"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutEgresos"
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/imageButtonEgresos"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:src="@drawable/baseline_money_off_24" />
+
+        <TextView
+            android:id="@+id/textViewEgresos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Egresos"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutResumen"
+        android:layout_width="13dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/imageButtonResumen"
+            android:layout_width="104dp"
+            android:layout_height="45dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:src="@drawable/baseline_account_balance_24" />
+
+        <TextView
+            android:id="@+id/textViewResumen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/Resumen"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutLogout"
+        android:layout_width="9dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/imageButtonLogout"
+            android:layout_width="100dp"
+            android:layout_height="46dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:src="@drawable/baseline_login_24" />
+
+        <TextView
+            android:id="@+id/textViewLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Logout"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</LinearLayout>

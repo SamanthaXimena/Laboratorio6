@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="20dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@drawable/edittext_bkg"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/item_titulo_ingresos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:elevation="3dp"
+                android:padding="8dp"
+                android:textSize="20sp"
+                android:text="Titulo de Ingreso " />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_marginStart="-280dp"
+            android:layout_marginTop="60dp">
+
+            <TextView
+                android:id="@+id/item_fecha_ingresos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:elevation="3dp"
+                android:padding="8dp"
+                android:text="Fecha " />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="60dp">
+
+            <TextView
+                android:id="@+id/item_monto_ingresos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:elevation="3dp"
+                android:padding="8dp"
+                android:text="Monto " />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/boton_detalles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="-50dp"
+            android:backgroundTint="@color/plomo"
+            android:layout_marginRight="30dp"
+            app:srcCompat="@drawable/baseline_info_24" />
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

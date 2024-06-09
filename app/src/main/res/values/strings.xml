@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Laboratorio6</string>
+    <string name="login">Inicio de Sesión</string>
+
+    <string name="correo">Correo</string>
+    <string name="contraseña">Contraseña</string>
+
+    <string name="Ingresos">Ingresos</string>
+    <string name="Egresos">Egresos</string>
+    <string name="Resumen">Resumen</string>
+    <string name="Logout">Logout</string>
+
+
+    <string name="facebook_app_id">317287154655157</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
+
+
 </resources>
