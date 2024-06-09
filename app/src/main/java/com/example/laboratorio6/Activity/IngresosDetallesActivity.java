@@ -43,7 +43,7 @@ public class IngresosDetallesActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String id_titulo_ingreso = intent.getStringExtra("id_titulo_ingreso");
-        String id_monto_ingreso = String.valueOf(intent.getStringExtra("id_monto_ingreso"));
+        String id_monto_ingreso =intent.getStringExtra("id_monto_ingreso");
         String id_desc_ingreso = intent.getStringExtra("id_desc_ingreso");
         String id_fecha_ingreso = intent.getStringExtra("id_fecha_ingreso");
 
@@ -66,10 +66,10 @@ public class IngresosDetallesActivity extends AppCompatActivity {
             @Override
             public void onClick (View v){
                 Intent intent = new Intent(IngresosDetallesActivity.this, IngresosEditarActivity.class);
-                intent.putExtra("id_titulo_ingreso", id_titulo_ingreso);
-                intent.putExtra("id_monto_ingreso", id_monto_ingreso);
-                intent.putExtra("id_desc_ingreso", id_desc_ingreso);
-                intent.putExtra("id_fecha_ingreso", id_fecha_ingreso);
+                intent.putExtra("id_titulo_ingreso", titulo_tw.getText().toString());
+                intent.putExtra("id_monto_ingreso", monto_tw.getText().toString());
+                intent.putExtra("id_desc_ingreso", descripcion_tw.getText().toString());
+                intent.putExtra("id_fecha_ingreso", fecha_tw.getText().toString());
                 startActivity(intent);
             }
         });

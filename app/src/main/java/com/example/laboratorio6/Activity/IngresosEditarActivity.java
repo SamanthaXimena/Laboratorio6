@@ -80,7 +80,7 @@ public class IngresosEditarActivity extends AppCompatActivity {
     }
 
 
-    private void ConfirmacionPopup(String titulo, String nuevaMonto, String nuevoDesc, String fecha) {
+    private void ConfirmacionPopup(String id_titulo_ingreso, String nuevaMonto, String nuevoDesc, String fecha) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("¿Estas seguro de guardar los cambios?");
 
@@ -89,7 +89,7 @@ public class IngresosEditarActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                editarIngreso(titulo, nuevaMonto, nuevoDesc, fecha);
+                editarIngreso(id_titulo_ingreso, nuevaMonto, nuevoDesc, fecha);
                 Intent intent = new Intent(IngresosEditarActivity.this, IngresosActivity.class);
                 startActivity(intent);
                 dialog.dismiss();
@@ -108,9 +108,10 @@ public class IngresosEditarActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void editarIngreso(String titulo, String nuevaMonto, String nuevoDesc, String fecha) {
+    private void editarIngreso(String id_titulo_ingreso, String nuevaMonto, String nuevoDesc, String fecha) {
+
         db.collection("Ingresos")
-                .whereEqualTo("titulo", titulo)
+                .whereEqualTo("titulo", id_titulo_ingreso)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -132,7 +133,7 @@ public class IngresosEditarActivity extends AppCompatActivity {
                                     });
                         } else {
                             // No se encontró ningún documento con el `sku` especificado
-                            Log.e("IngresosEditarActivity", "El documento con titulo " + titulo + " no existe.");
+                            Log.e("IngresosEditarActivity", "El documento con titulo " + id_titulo_ingreso + " no existe.");
                         }
                     } else {
                         Log.e("IngresosEditarActivity", "Error al obtener el documento", task.getException());
