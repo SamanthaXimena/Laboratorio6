@@ -1,7 +1,9 @@
 buildscript {
 
     { repositories {
+        google()
         mavenCentral()
+
     }}
 
     dependencies {
@@ -11,3 +13,4 @@ buildscript {
 plugins {
 alias(libs.plugins.androidApplication) apply false
 }
+
