@@ -16,6 +16,7 @@ public class Ingresos_Data {
     public Ingresos_Data() {
     }
 
+
     public String getTitulo() {
         return titulo;
     }

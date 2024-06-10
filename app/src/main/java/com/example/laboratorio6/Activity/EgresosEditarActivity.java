@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -57,6 +58,7 @@ public class EgresosEditarActivity extends AppCompatActivity {
                 intent.putExtra("id_fecha_egresos", id_fecha_egresos);
                 v.getContext().startActivity(intent);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -78,7 +80,7 @@ public class EgresosEditarActivity extends AppCompatActivity {
     }
 
 
-    private void ConfirmacionPopup(String titulo, String nuevaMonto, String nuevoDesc, String fecha) {
+    private void ConfirmacionPopup(String id_titulo_egresos, String nuevaMonto, String nuevoDesc, String fecha) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("¿Estas seguro de guardar los cambios?");
 
@@ -86,12 +88,30 @@ public class EgresosEditarActivity extends AppCompatActivity {
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // Validar que nuevaMonto no esté vacío y sea un número válido
+                if (nuevaMonto != null && !nuevaMonto.isEmpty()) {
+                    try {
+                        String nuevoMontoVal = String.valueOf(Double.parseDouble(nuevaMonto));
 
-                editarEgreso(titulo, nuevaMonto, nuevoDesc, fecha);
-                Intent intent = new Intent(EgresosEditarActivity.this, EgresosActivity.class);
-                startActivity(intent);
+                        // Actualizar el ingreso con el nuevo monto
+                        editarEgreso(id_titulo_egresos, nuevaMonto, nuevoDesc, fecha);
+
+                        // Navegar a IngresosActivity
+                        Intent intent = new Intent(EgresosEditarActivity.this, IngresosActivity.class);
+                        startActivity(intent);
+
+                        // Finalizar la actividad actual
+                        finish();
+                    } catch (NumberFormatException e) {
+                        // Mostrar un mensaje de error si el monto no es un número válido
+                        Toast.makeText(EgresosEditarActivity.this, "El monto debe ser un número válido", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    // Mostrar un mensaje de error si el monto está vacío
+                    Toast.makeText(EgresosEditarActivity.this, "El monto no puede estar vacío", Toast.LENGTH_SHORT).show();
+                }
+
                 dialog.dismiss();
-
             }
         });
 
@@ -106,9 +126,9 @@ public class EgresosEditarActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void editarEgreso(String titulo, String nuevaMonto, String nuevoDesc, String fecha) {
+    private void editarEgreso(String id_titulo_egresos, String nuevaMonto, String nuevoDesc, String fecha) {
         db.collection("Egresos")
-                .whereEqualTo("titulo", titulo)
+                .whereEqualTo("titulo", id_titulo_egresos)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -129,7 +149,7 @@ public class EgresosEditarActivity extends AppCompatActivity {
                                     });
                         } else {
                             // No se encontró ningún documento con el `sku` especificado
-                            Log.e("EgresosEditarActivity", "El documento con titulo " + titulo + " no existe.");
+                            Log.e("EgresosEditarActivity", "El documento con titulo " + id_titulo_egresos + " no existe.");
                         }
                     } else {
                         Log.e("EgresosEditarActivity", "Error al obtener el documento", task.getException());

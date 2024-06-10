@@ -40,6 +40,9 @@
             android:name=".Activity.EgresosDetallesActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.EgresosEditarActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.IngresosActivity"
             android:exported="false" />
         <activity

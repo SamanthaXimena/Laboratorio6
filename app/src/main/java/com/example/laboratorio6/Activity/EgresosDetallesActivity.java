@@ -57,10 +57,10 @@ public class EgresosDetallesActivity  extends AppCompatActivity {
             @Override
             public void onClick (View v){
                 Intent intent = new Intent(EgresosDetallesActivity.this, EgresosEditarActivity.class);
-                intent.putExtra("id_titulo_ingreso", id_titulo_egresos);
-                intent.putExtra("id_monto_ingreso", id_monto_egresos);
-                intent.putExtra("id_desc_ingreso", id_desc_egresos);
-                intent.putExtra("id_fecha_ingreso", id_fecha_egresos);
+                intent.putExtra("id_titulo_egresos", id_titulo_egresos);
+                intent.putExtra("id_monto_egresos", id_monto_egresos);
+                intent.putExtra("id_desc_egresos", id_desc_egresos);
+                intent.putExtra("id_fecha_egresos", id_fecha_egresos);
                 startActivity(intent);
             }
         });
@@ -70,9 +70,8 @@ public class EgresosDetallesActivity  extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ConfirmacionPopup(id_titulo_egresos);
-                /*Intent intent = new Intent(EgresosDetallesActivity.this, EgresosActivity.class);
-                ConfirmacionPopup(id_titulo_egresos);
-                startActivity(intent);*/
+                Intent intent = new Intent(EgresosDetallesActivity.this, EgresosActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -117,7 +116,7 @@ public class EgresosDetallesActivity  extends AppCompatActivity {
                                     .delete()
                                     .addOnSuccessListener(unused -> {
                                         Toast.makeText(EgresosDetallesActivity.this, "Egreso con Título " + id_titulo_egresos + " eliminado correctamente", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(EgresosDetallesActivity.this, IngresosActivity.class);
+                                        Intent intent = new Intent(EgresosDetallesActivity.this, EgresosActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                         finish();

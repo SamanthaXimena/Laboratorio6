@@ -83,7 +83,7 @@ public class IngresosNuevoActivity extends AppCompatActivity {
     private void guardarIngreso() {
 
         String titulo = binding.idTituloIngreso.getText().toString();
-        String monto =binding.idMontoIngreso.getText().toString();
+        String monto = binding.idMontoIngreso.getText().toString();
         String descripcion = binding.idDescIngreso.getText().toString();
         String fecha = binding.idFechaIngreso.getText().toString();
 

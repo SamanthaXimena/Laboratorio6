@@ -69,18 +69,18 @@ public class MainActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     ImageButton login_button_Google;
 
-/*
-    public void onStart() {
 
+    public void onStart() {
+        super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             Intent intent = new Intent(MainActivity.this , IngresosActivity.class );
             startActivity(intent);
         }
-        super.onStart();
+        updateUI(currentUser);
 
-    }*/
+    }
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -213,7 +213,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    @SuppressLint("RestrictedApi")
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
 
